@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AlbumList.MainPage"
+             Title="Music Library"
+             xmlns:local="clr-namespace:AlbumList"
+             x:DataType="local:AlbumViewModel">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20">
+            <!-- Editable library name -->
+            <Label Text="Library Name:" FontAttributes="Bold"/>
+            <Entry Text="{Binding LibraryName}" Placeholder="Enter library name"/>
+            <Label Text="{Binding LibraryName}" FontSize="Medium" FontAttributes="Bold" HorizontalOptions="Center"/>
+
+            <CollectionView ItemsSource="{Binding Albums}" 
+                        SelectionMode="Single"
+                        SelectedItem="{Binding SelectedAlbum}"
+                       SelectionChanged="CollectionView_SelectionChanged">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="local:Album">
+                        <StackLayout Padding="10">
+                            <Label Text="{Binding Title}" FontSize="Medium" FontAttributes="Bold"/>
+                            <Label Text="{Binding Artist}" FontSize="Small"/>
+                            <Label Text="{Binding Year}" FontSize="Small"/>
+                            <Label Text="{Binding Genre}" FontSize="Small"/>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
