@@ -37,10 +37,10 @@ namespace AlbumList
             }
         }
 
-        public AlbumViewModel(string url, int no) {
+        public AlbumViewModel(string url, int numb) {
             _url = url;
             _libraryNo = no;
-            _libraryName = Preferences.Default.Get($"library{_libraryno}", "My Music Library");
+            _libraryName = Preferences.Default.Get($"library{numb}", "My Music Library");
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
