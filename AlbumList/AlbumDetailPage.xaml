@@ -13,13 +13,39 @@
             <Binding Path="Title" />
         </MultiBinding>
     </ContentPage.Title>
-    <VerticalStackLayout Padding="20">
-        <ActivityIndicator IsVisible="{Binding IsDownloading, Source={x:Reference AlbDetail}}" IsRunning="{Binding IsDownloading, Source={x:Reference AlbDetail}}"/>
-        <Image x:Name="ImageDisplay" IsVisible="{Binding IsNotDownloading, Source={x:Reference AlbDetail}}" HeightRequest="200" WidthRequest="200" VerticalOptions="Center"/>
-        <Label Text="{Binding Title}" FontSize="Large" FontAttributes="Bold"/>
+    <Grid Padding="20" ColumnSpacing="30" ColumnDefinitions="*,2*">
+
+
+        <!-- Left side: Image and Info -->
+        <VerticalStackLayout Grid.Column="0" Spacing="10" WidthRequest="250">
+            <ActivityIndicator IsVisible="{Binding IsDownloading, Source={x:Reference AlbDetail}}" 
+               IsRunning="{Binding IsDownloading, Source={x:Reference AlbDetail}}"
+               VerticalOptions="Center"
+               HorizontalOptions="Center"/>
+            <Image x:Name="ImageDisplay" 
+               HeightRequest="200" 
+               WidthRequest="200" 
+               Aspect="AspectFit" IsVisible="{Binding IsNotDownloading, Source={x:Reference AlbDetail}}"/>
+
+            <Label Text="{Binding Title}" FontSize="Large" FontAttributes="Bold"/>
             <Label Text="{Binding Artist}" FontSize="Medium"/>
             <Label Text="{Binding Year}" FontSize="Medium"/>
             <Label Text="{Binding Genre}" FontSize="Medium"/>
-        <Button Text="Back" Clicked="Button_Clicked"/>
-    </VerticalStackLayout>
+
+            <Button Text="Back" Clicked="Button_Clicked" Margin="0,20,0,0"/>
+        </VerticalStackLayout>
+
+        <!-- Right side: Track Listing -->
+        <VerticalStackLayout Grid.Column="1" Spacing="10">
+            <Label Text="Track Listing" FontSize="Large" FontAttributes="Bold"/>
+
+            <CollectionView x:Name="ItemCollectionView" ItemsSource="{Binding NumberedTracks}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="x:String">
+                        <Label Text="{Binding}" FontSize="Small" Padding="5,3"/>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </Grid>
 </ContentPage>
