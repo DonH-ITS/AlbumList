@@ -7,7 +7,7 @@
         public MainPage()
         {
             InitializeComponent();
-            viewModel = new AlbumViewModel();
+            viewModel = new AlbumViewModel("https://raw.githubusercontent.com/DonH-ITS/jsonfiles/refs/heads/main/library1.json", 1);
             BindingContext = viewModel;
         }
 
@@ -21,15 +21,6 @@
                 ((CollectionView)sender).SelectedItem = null;
             }
         }
-
-        protected override void OnDisappearing() {
-            base.OnDisappearing();
-            // Preferences saving could go here
-            /* if(Preferences.Default.Get("libraryname", "My Music Library") != viewModel.LibraryName) {
-                Preferences.Default.Set("libraryname", viewModel.LibraryName);
-            }*/
-        }
-
 
     }
 }
