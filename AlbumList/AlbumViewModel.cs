@@ -32,14 +32,14 @@ namespace AlbumList
                     _libraryName = value;
                     OnPropertyChanged();
                     // Preferences updating could go here, but may be excessive to write all the time
-                    Preferences.Default.Set($"library{_libraryno}", _libraryName);
+                    Preferences.Default.Set($"library{_libraryNo}", _libraryName);
                 }
             }
         }
 
         public AlbumViewModel(string url, int numb) {
             _url = url;
-            _libraryNo = no;
+            _libraryNo = numb;
             _libraryName = Preferences.Default.Get($"library{numb}", "My Music Library");
         }
 

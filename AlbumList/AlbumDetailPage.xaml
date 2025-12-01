@@ -39,7 +39,7 @@
         <VerticalStackLayout Grid.Column="1" Spacing="10">
             <Label Text="Track Listing" FontSize="Large" FontAttributes="Bold"/>
 
-            <CollectionView x:Name="ItemCollectionView" ItemsSource="{Binding NumberedTracks}">
+            <CollectionView x:Name="ItemCollectionView" ItemsSource="{Binding Tracks}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="x:String">
                         <Label Text="{Binding}" FontSize="Small" Padding="5,3"/>
