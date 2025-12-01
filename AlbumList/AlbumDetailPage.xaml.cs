@@ -39,11 +39,9 @@ public partial class AlbumDetailPage : ContentPage
         await Task.Delay(50);
         IsDownloading = true;
         BindingContext = AlbumProperty;
-        var client = new HttpClient();
+        
         try {
-            client.DefaultRequestHeaders.UserAgent.ParseAdd("MyMauiApp/1.0");
-
-            byte[] data = await client.GetByteArrayAsync(AlbumProperty.CoverUrl);
+            byte[] data = await App.HttpClient.GetByteArrayAsync(AlbumProperty.CoverUrl);
 
             ImageSource imgSrc = ImageSource.FromStream(() => new MemoryStream(data));
             ImageDisplay.Source = imgSrc;
@@ -53,6 +51,8 @@ public partial class AlbumDetailPage : ContentPage
             ImageDisplay.BackgroundColor = Colors.Black;
         }
         IsDownloading = false;
+
+
     }
 
     private async void Button_Clicked(object sender, EventArgs e) {

@@ -22,5 +22,31 @@
             }
         }
 
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+            if (viewModel != null && !viewModel.IsLoaded)
+            {
+                await Task.Delay(50);
+                await viewModel.DownloadAlbums();
+            }
+        }
+
+        private void SortByClicked(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            viewModel.SortAlbums(btn.Text);
+        }
+
+        private async void SaveButton_Clicked(object sender, EventArgs e)
+        {
+            SaveButton.IsEnabled = false;
+            await viewModel.SaveLibrary();
+            SaveButton.Text = "Library Saved";
+            await Task.Delay(1500);
+            SaveButton.Text = "Save Library";
+            SaveButton.IsEnabled = true;
+        }
+
     }
 }

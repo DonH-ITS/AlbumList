@@ -2,9 +2,11 @@
 {
     public partial class App : Application
     {
+        public static HttpClient HttpClient { get; } = new HttpClient();
         public App()
         {
             InitializeComponent();
+            HttpClient.DefaultRequestHeaders.UserAgent.ParseAdd("MyMauiApp/1.0");
         }
 
         protected override Window CreateWindow(IActivationState? activationState)
