@@ -6,9 +6,27 @@
     xmlns:local="clr-namespace:AlbumList"
     Title="AlbumList">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <TabBar>
+        <ShellContent
+            Title="Library 1"
+            Route="library1" x:Name="Library1Tab">   
+            <local:MainPage>
+                <x:Arguments>
+                    <x:String>https://raw.githubusercontent.com/DonH-ITS/jsonfiles/refs/heads/main/library1.json</x:String>
+                    <x:Int32>1</x:Int32>
+                </x:Arguments>
+            </local:MainPage>
+        </ShellContent>
+        <ShellContent
+            Title="Library 2"
+            Route="library2" x:Name="Library2Tab">
+            <local:MainPage>
+                <x:Arguments>
+                    <x:String>https://raw.githubusercontent.com/DonH-ITS/jsonfiles/refs/heads/main/library2.json</x:String>
+                    <x:Int32>2</x:Int32>
+                </x:Arguments>
+            </local:MainPage>
+        </ShellContent>
+    </TabBar>
 
 </Shell>

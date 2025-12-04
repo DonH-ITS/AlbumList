@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+         xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+         x:Class="AlbumList.AddAlbumPage"
+         Title="Add New Album"
+         xmlns:local="clr-namespace:AlbumList">
+
+    <ScrollView>
+            <VerticalStackLayout Padding="20" Spacing="10">
+
+                <!-- Album Info -->
+                <Label Text="Title:" FontAttributes="Bold"/>
+                <Entry x:Name="TitleEntry" Placeholder="Enter album title"/>
+
+                <Label Text="Artist:" FontAttributes="Bold"/>
+                <Entry x:Name="ArtistEntry" Placeholder="Enter artist name"/>
+
+                <Label Text="Year:" FontAttributes="Bold"/>
+                <Entry x:Name="YearEntry" Placeholder="Enter year"/>
+
+                <Label Text="Genre:" FontAttributes="Bold"/>
+                <Entry x:Name="GenreEntry" Placeholder="Enter genre"/>
+
+                <Label Text="Cover URL:" FontAttributes="Bold"/>
+                <Entry x:Name="CoverUrlEntry" Placeholder="Enter cover image URL"/>
+
+                <!-- Track Listing -->
+                <Label Text="Tracks:" FontAttributes="Bold"/>
+                <CollectionView x:Name="TracksCollectionView" ItemsSource="{Binding Tracks}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <HorizontalStackLayout Spacing="10">
+                                <Label Text="{Binding .}" />
+                                <Button Text="Remove" Clicked="RemoveTrackClicked"/>
+                            </HorizontalStackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <HorizontalStackLayout Spacing="10">
+                    <Entry x:Name="NewTrackEntry" Placeholder="Enter track name" Completed="AddTrackClicked" HorizontalOptions="Fill"/>
+                    <Button Text="Add Track" Clicked="AddTrackClicked"/>
+                </HorizontalStackLayout>
+
+                <!-- Submit -->
+                <Button x:Name="AddAlbumBtn" Text="Add Album" Clicked="AddAlbumClicked" BackgroundColor="LightGreen"/>
+            </VerticalStackLayout>
+        </ScrollView>
+    </ContentPage>

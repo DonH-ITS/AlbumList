@@ -13,13 +13,45 @@
             <Binding Path="Title" />
         </MultiBinding>
     </ContentPage.Title>
-    <VerticalStackLayout Padding="20">
-        <ActivityIndicator IsVisible="{Binding IsDownloading, Source={x:Reference AlbDetail}}" IsRunning="{Binding IsDownloading, Source={x:Reference AlbDetail}}"/>
-        <Image x:Name="ImageDisplay" IsVisible="{Binding IsNotDownloading, Source={x:Reference AlbDetail}}" HeightRequest="200" WidthRequest="200" VerticalOptions="Center"/>
-        <Label Text="{Binding Title}" FontSize="Large" FontAttributes="Bold"/>
-            <Label Text="{Binding Artist}" FontSize="Medium"/>
-            <Label Text="{Binding Year}" FontSize="Medium"/>
-            <Label Text="{Binding Genre}" FontSize="Medium"/>
-        <Button Text="Back" Clicked="Button_Clicked"/>
-    </VerticalStackLayout>
+    <Grid Padding="15" ColumnSpacing="30" RowSpacing="10" x:Name="MainGrid">
+
+        <!-- Left side: Image and Info -->
+        <VerticalStackLayout Grid.Column="0" Grid.Row="0" Spacing="10" x:Name="DetailsStack">
+            <ActivityIndicator IsVisible="{Binding IsDownloading, Source={x:Reference AlbDetail}}" 
+           IsRunning="{Binding IsDownloading, Source={x:Reference AlbDetail}}"
+           VerticalOptions="Center"
+           HorizontalOptions="Center"
+           HeightRequest="{OnPlatform WinUI=200, Android=150}"
+            WidthRequest="{OnPlatform WinUI=200, Android=150}"/>
+            <Image x:Name="ImageDisplay" 
+           HeightRequest="{OnPlatform WinUI=200, Android=150}"
+       WidthRequest="{OnPlatform WinUI=200, Android=150}"
+           Aspect="AspectFit" IsVisible="{Binding IsNotDownloading, Source={x:Reference AlbDetail}}"/>
+            <Label Text="{Binding Title}" FontAttributes="Bold"
+       FontSize="{OnPlatform WinUI=Large, Android=Medium}" />
+
+            <Label Text="{Binding Artist}"
+       FontSize="{OnPlatform WinUI=Medium, Android=Small}" />
+
+            <Label Text="{Binding Year}"
+       FontSize="{OnPlatform WinUI=Medium, Android=Small}" />
+
+            <Label Text="{Binding Genre}"
+       FontSize="{OnPlatform WinUI=Medium, Android=Small}" />
+            <Button Text="Back" Clicked="Button_Clicked" Margin="0,20,0,0"/>
+        </VerticalStackLayout>
+
+        <!-- Right side: Track Listing -->
+        <VerticalStackLayout Spacing="10" x:Name="ItemCollectionViewParent">
+
+            <Label x:Name="TrackText" Text="Track Listing" FontSize="Large" FontAttributes="Bold"/>
+            <CollectionView x:Name="ItemCollectionView" ItemsSource="{Binding NumberedTracks}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="x:String">
+                        <Label Text="{Binding}" FontSize="Small" Padding="5,3"/>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </Grid>
 </ContentPage>

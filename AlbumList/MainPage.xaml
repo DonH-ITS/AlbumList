@@ -12,19 +12,42 @@
             <Label Text="Library Name:" FontAttributes="Bold"/>
             <Entry Text="{Binding LibraryName}" Placeholder="Enter library name"/>
             <Label Text="{Binding LibraryName}" FontSize="Medium" FontAttributes="Bold" HorizontalOptions="Center"/>
+            <!-- Sort Options -->
+            <Label Text="Options:" FontAttributes="Bold" Margin="0,10,0,5"/>
+            <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+                <Button Text="Add Album" Clicked="AddAlbumButton_Clicked"/>
+                <Button x:Name="SaveButton" Text="Save Library" Clicked="SaveButton_Clicked"/>
+            </HorizontalStackLayout>
+            <Label HeightRequest="5"/>
+            <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+                <Button Text="Title" Clicked="SortByClicked"/>
+                <Button Text="Artist" Clicked="SortByClicked"/>
+                <Button Text="Year" Clicked="SortByClicked"/>
+            </HorizontalStackLayout>
 
+            <ActivityIndicator IsVisible="{Binding ShowActivity}" IsRunning="{Binding ShowActivity}"/>
             <CollectionView ItemsSource="{Binding Albums}" 
                         SelectionMode="Single"
                         SelectedItem="{Binding SelectedAlbum}"
-                       SelectionChanged="CollectionView_SelectionChanged">
+                       SelectionChanged="CollectionView_SelectionChanged" >
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="local:Album">
-                        <StackLayout Padding="10">
-                            <Label Text="{Binding Title}" FontSize="Medium" FontAttributes="Bold"/>
-                            <Label Text="{Binding Artist}" FontSize="Small"/>
-                            <Label Text="{Binding Year}" FontSize="Small"/>
-                            <Label Text="{Binding Genre}" FontSize="Small"/>
-                        </StackLayout>
+                        <Grid Padding="10" VerticalOptions="Center" ColumnDefinitions="*,55">
+                            <VerticalStackLayout Padding="10">
+                                <Label Text="{Binding Title}" FontSize="Medium" FontAttributes="Bold"/>
+                                <Label Text="{Binding Artist}" FontSize="Small"/>
+                                <Label Text="{Binding Year}" FontSize="Small"/>
+                                <Label Text="{Binding Genre}" FontSize="Small"/>
+                            </VerticalStackLayout>
+                            <Button Text="Edit" Grid.Column="1"
+                                    HorizontalOptions="End"
+                                    VerticalOptions="Center"
+                                    Margin="20,0,0,0"
+                                    Clicked="EditButton_Clicked"
+                                    WidthRequest="55"
+                                    HeightRequest="50"
+                                    CommandParameter="{Binding .}" />
+                        </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
